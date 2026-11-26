@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1E3A8A" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="أفق اليمن" />
+  <title>أفق اليمن التعليمي — جميع الصفوف اليمنية</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg" />
+  <link rel="apple-touch-icon" href="icons/icon-192.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1E3A8A;
+      --primary-dark: #172554;
+      --accent: #F59E0B;
+      --accent-dark: #D97706;
+      --emerald: #0D9488;
+      --bg-page: #F1F5F9;
+      --bg-card: #FFFFFF;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --border: #E2E8F0;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --radius: 16px;
+    }
+
+    body.theme-emerald {
+      --primary: #065F46;
+      --primary-dark: #064E3B;
+      --accent: #D97706;
+      --accent-dark: #B45309;
+      --emerald: #0284C7;
+    }
+
+    body.theme-royal-indigo {
+      --primary: #3730A3;
+      --primary-dark: #312E81;
+      --accent: #EA580C;
+      --accent-dark: #C2410C;
+      --emerald: #059669;
+    }
+
+    body.theme-warm-gold {
+      --primary: #78350F;
+      --primary-dark: #451A03;
+      --accent: #0F766E;
+      --accent-dark: #115E59;
+      --emerald: #B45309;
+    }
+
+    body.dark-mode {
+      --bg-page: #0B1120;
+      --bg-card: #111827;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border: #1E293B;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding-bottom: 84px;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .app-shell {
+      max-width: 560px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--bg-page);
+      position: relative;
+      box-shadow: 0 0 40px rgba(0,0,0,0.06);
+    }
+
+    /* Header */
+    .top-bar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.14);
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(245, 158, 11, 0.35);
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      opacity: 0.88;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .icon-btn {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: #fff;
+      border-radius: 10px;
+      padding: 6px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .container {
+      padding: 14px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+
+    /* Role Grid (Matches Reference Image 1 layout) */
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .role-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+
+    .role-card.active.role-student {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .role-card.active.role-teacher {
+      background: var(--emerald);
+      border-color: var(--emerald);
+      color: #fff;
+    }
+
+    .role-card.active.role-school {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .role-card.active.role-parent {
+      background: #2563EB;
+      border-color: #2563EB;
+      color: #fff;
+    }
+
+    .role-emoji {
+      font-size: 30px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .role-name {
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .radio-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: grid;
+      place-items: center;
+    }
+
+    .role-card.active .radio-dot::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    select, input, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--bg-page);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 13px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.12s ease, opacity 0.15s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-demo {
+      background: var(--accent);
+      color: #fff;
+      margin-bottom: 10px;
+      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-register {
+      background: var(--emerald);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(13, 148, 136, 0.28);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text-main);
+    }
+
+    /* WhatsApp Activation Card */
+    .wa-box {
+      text-align: center;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .wa-numbers-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      font-weight: 800;
+      color: var(--text-main);
+      direction: ltr;
+    }
+
+    .small-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+      background: var(--bg-page);
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Student Banner */
+    .profile-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--emerald) 100%);
+      color: #fff;
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid #fff;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    /* Horizontal Subjects Strip */
+    .subjects-strip {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 8px 4px 12px;
+      scrollbar-width: thin;
+    }
+
+    .subj-chip {
+      min-width: 82px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 8px;
+      text-align: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.18s ease;
+    }
+
+    .subj-chip:hover, .subj-chip.active {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .subj-icon {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .subj-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    /* Feature Banners (Matches Reference Image 2 & 3) */
+    .feature-banner {
+      border-radius: 16px;
+      padding: 16px;
+      color: #fff;
+      margin-bottom: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease;
+    }
+
+    .feature-banner:active {
+      transform: scale(0.99);
+    }
+
+    .banner-tasks {
+      background: linear-gradient(120deg, #D97706, #F59E0B);
+    }
+
+    .banner-teachers {
+      background: linear-gradient(120deg, #047857, #10B981);
+    }
+
+    .banner-honor {
+      background: linear-gradient(120deg, #0369A1, #0EA5E9);
+    }
+
+    .banner-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+
+    .banner-sub {
+      font-size: 12px;
+      opacity: 0.92;
+      font-weight: 700;
+    }
+
+    /* 5 Subject Sections */
+    .sections-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 15px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .section-card.selected {
+      border-color: var(--primary);
+      background: rgba(30, 58, 138, 0.06);
+    }
+
+    .section-card.full-span {
+      grid-column: 1 / -1;
+    }
+
+    .section-title {
+      font-size: 13.5px;
+      font-weight: 900;
+      margin-bottom: 3px;
+    }
+
+    .section-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Format Tabs */
+    .format-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .fmt-btn {
+      padding: 7px 11px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--bg-page);
+      color: var(--text-main);
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .fmt-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .viewer-box {
+      background: var(--bg-page);
+      border: 1.5px dashed var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 170px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #drawCanvas {
+      width: 100%;
+      height: 170px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid var(--border);
+      display: none;
+      touch-action: none;
+    }
+
+    /* Floating WhatsApp */
+    .wa-float {
+      position: fixed;
+      bottom: 76px;
+      left: 16px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #16A34A;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.4);
+      z-index: 45;
+    }
+
+    /* Bottom All-Tools Bar */
+    .bottom-tools-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 560px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 6px 8px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 4px;
+      z-index: 50;
+      box-shadow: 0 -6px 20px rgba(0,0,0,0.08);
+    }
+
+    .tool-item {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 5px;
+      border-radius: 8px;
+    }
+
+    .tool-item span.ico {
+      font-size: 16px;
+    }
+
+    .tool-item.active-tool {
+      background: rgba(245, 158, 11, 0.18);
+      color: var(--accent-dark);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 80;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      color: var(--text-main);
+      width: 100%;
+      max-width: 440px;
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .calc-btn {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-page);
+      color: var(--text-main);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      background: rgba(245, 158, 11, 0.18);
+      color: var(--accent-dark);
+    }
+
+    @media print {
+      .top-bar, .bottom-tools-bar, .wa-float, .no-print {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        padding-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Header -->
+    <header class="top-bar">
+      <div class="brand-box">
+        <div class="brand-logo" id="headerBrandMark">أفق</div>
+        <div>
+          <div class="brand-title" id="headerTitleText">أفق اليمن التعليمي</div>
+          <div class="brand-sub" id="headerSubtitleText">النظام التعليمي اليمني (أساسي وثانوي)</div>
+        </div>
+      </div>
+      <div class="header-actions no-print">
+        <button class="icon-btn" id="installAppBtn" title="تثبيت التطبيق على الجوال">📲 تثبيت</button>
+        <button class="icon-btn" id="cycleThemeBtn" title="تغيير ألوان التطبيق">🎨 ألوان</button>
+        <button class="icon-btn" id="switchScreenBtn" title="العودة لتسجيل الحساب">👤 حساب</button>
+      </div>
+    </header>
+
+    <!-- SCREEN 1: REGISTRATION / ACCOUNT -->
+    <section id="screenAuth" class="container">
+      <div style="text-align:center; margin: 4px 0 12px;">
+        <span class="badge">منصة أفق اليمن التعليمي • جميع الصفوف</span>
+      </div>
+
+      <!-- 4 Account Cards -->
+      <div class="role-grid">
+        <div class="role-card role-teacher" data-role="معلم" onclick="selectRole('معلم')">
+          <div class="radio-dot"></div>
+          <span class="role-emoji">👨‍🏫</span>
+          <div class="role-name">معلم</div>
+        </div>
+
+        <div class="role-card role-student active" data-role="طالب" onclick="selectRole('طالب')">
+          <div class="radio-dot"></div>
+          <span class="role-emoji">🎓</span>
+          <div class="role-name">طالب</div>
+        </div>
+
+        <div class="role-card role-school" data-role="مدرسة" onclick="selectRole('مدرسة')">
+          <div class="radio-dot"></div>
+          <span class="role-emoji">🏫</span>
+          <div class="role-name">مدرسة</div>
+        </div>
+
+        <div class="role-card role-parent" data-role="ولي امر" onclick="selectRole('ولي امر')">
+          <div class="radio-dot"></div>
+          <span class="role-emoji">👨‍👩‍👧</span>
+          <div class="role-name">ولي امر</div>
+        </div>
+      </div>
+
+      <!-- Student / Grade Selection Card -->
+      <div class="card">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+          <div>
+            <label>الاسم الكامل</label>
+            <input type="text" id="authNameInput" value="نسيم حميد المنتصر" placeholder="أدخل الاسم" />
+          </div>
+          <div>
+            <label>المحافظة / المديرية</label>
+            <input type="text" id="authGovInput" value="الحديدة - المدينة" placeholder="مثال: صنعاء / تعز / عدن" />
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+          <div>
+            <label>المرحلة التعليمية (النظام اليمني)</label>
+            <select id="authStageSelect" onchange="populateGradesDropdown('authStageSelect', 'authGradeSelect', 'authTrackWrap')">
+              <option value="basic">مرحلة التعليم الأساسي (1 - 9 أساسي)</option>
+              <option value="secondary" selected>مرحلة التعليم الثانوي (1 - 3 ثانوي)</option>
+            </select>
+          </div>
+
+          <div>
+            <label>الصف الدراسي</label>
+            <select id="authGradeSelect" onchange="toggleTrackSelect('authGradeSelect', 'authTrackWrap')"></select>
+          </div>
+        </div>
+
+        <div id="authTrackWrap" style="margin-bottom: 12px;" class="hidden">
+          <label>التخصص / القسم الثانوي</label>
+          <select id="authTrackSelect">
+            <option value="علمي">القسم العلمي</option>
+            <option value="أدبي">القسم الأدبي</option>
+          </select>
+        </div>
+
+        <button class="btn btn-demo" onclick="enterDashboard(true)">🚀 دخول تجريبي</button>
+        <button class="btn btn-register" onclick="enterDashboard(false)">🎟️ تسجيل حساب (كرت التفعيل)</button>
+      </div>
+
+      <!-- WhatsApp & Activation Numbers with X placeholders + Edit button -->
+      <div class="card wa-box">
+        <div>للاستفادة من خدمات تطبيق <strong>أفق اليمن التعليمي</strong> يجب عليك الحصول على كرت التفعيل</div>
+        <div style="margin-top:4px;">لمعرفة نقاط البيع التواصل على الأرقام التالية:</div>
+        <div class="wa-numbers-row">
+          <span id="waPrimaryDisplay">77XXXXXXX</span>
+          <span>-</span>
+          <span id="waSecondaryDisplay">73XXXXXXX</span>
+          <button class="small-pill no-print" onclick="openWhatsAppEditor()">✏️ تعديل الأرقام</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: DASHBOARD -->
+    <section id="screenDashboard" class="container hidden">
+      <div class="profile-banner">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="profile-avatar" id="dashAvatar">🎓</div>
+          <div>
+            <div style="font-size:16px; font-weight:900;" id="dashUserName">نسيم حميد المنتصر</div>
+            <div style="font-size:12px; opacity:0.92;" id="dashGradeBadge">الصف: ثالث ثانوي - القسم العلمي</div>
+            <div style="font-size:11px; opacity:0.82;" id="dashRoleLocation">طالب • الحديدة - المدينة</div>
+          </div>
+        </div>
+        <button class="icon-btn" onclick="openQuickGradeModal()">📚 تغيير الصف</button>
+      </div>
+
+      <!-- Horizontal Subjects Strip -->
+      <div class="card" style="padding: 10px 12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+          <strong style="font-size:13px;">المواد الدراسية المقررة</strong>
+          <span style="font-size:11px; color:var(--text-muted);" id="subjectsCountLabel"></span>
+        </div>
+        <div class="subjects-strip" id="subjectsStrip"></div>
+      </div>
+
+      <!-- 3 Big Feature Cards matching reference screenshots -->
+      <div class="feature-banner banner-tasks" onclick="openFeatureModal('tasks')">
+        <div>
+          <div class="banner-title">مهام دراسية</div>
+          <div class="banner-sub">جديدة | معلقة | مؤرشفة</div>
+        </div>
+        <div style="font-size:38px;">🗂️</div>
+      </div>
+
+      <div class="feature-banner banner-teachers" onclick="openFeatureModal('teachers')">
+        <div>
+          <div class="banner-title">المعلمون</div>
+          <div class="banner-sub">إضافة | بحث | حذف</div>
+        </div>
+        <div style="font-size:38px;">👩‍🏫</div>
+      </div>
+
+      <div class="feature-banner banner-honor" onclick="openFeatureModal('honor')">
+        <div>
+          <div class="banner-title">لوحة الشرف</div>
+          <div class="banner-sub">المتميزون على مستوى الجمهورية • المحافظة | المديرية | المدرسة</div>
+        </div>
+        <div style="font-size:38px;">🏅</div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: SUBJECT WORKSPACE (5 SECTIONS + MULTI-FORMAT VIEWER) -->
+    <section id="screenSubject" class="container hidden">
+      <div class="card" style="padding: 12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+          <div>
+            <div style="font-size:11px; color:var(--text-muted); font-weight:700;" id="subjBreadcrumb"></div>
+            <div style="font-size:18px; font-weight:900;" id="activeSubjectTitle">الرياضيات</div>
+          </div>
+          <button class="small-pill" onclick="showScreen('dashboard')">⬅️ عودة للمواد</button>
+        </div>
+      </div>
+
+      <!-- 5 Required Sections -->
+      <div class="sections-grid">
+        <div class="section-card selected" data-sec="book" onclick="selectSection('book')">
+          <div class="section-title">📖 قسم الكتاب المدرسي</div>
+          <div class="section-desc">الكتاب المقرر كاملاً حسب الفصول والوحدات</div>
+        </div>
+
+        <div class="section-card" data-sec="summaries" onclick="selectSection('summaries')">
+          <div class="section-title">📝 قسم الملخصات</div>
+          <div class="section-desc">ملخصات مركزة وقوانين وخرائط ذهنية للمادة</div>
+        </div>
+
+        <div class="section-card" data-sec="models" onclick="selectSection('models')">
+          <div class="section-title">📄 قسم النماذج</div>
+          <div class="section-desc">نماذج اختبارات وزارية وفصلية وتجريبية</div>
+        </div>
+
+        <div class="section-card" data-sec="solutions" onclick="selectSection('solutions')">
+          <div class="section-title">✅ قسم حل الاختبارات</div>
+          <div class="section-desc">حلول نموذجية مفصلة مع خطوات الإجابة</div>
+        </div>
+
+        <div class="section-card full-span" data-sec="assessments" onclick="selectSection('assessments')">
+          <div class="section-title">🧩 قسم حل أسئلة تقاويم جميع الدروس</div>
+          <div class="section-desc">إجابات شاملة لجميع أسئلة التقويم والأنشطة في نهاية كل درس</div>
+        </div>
+      </div>
+
+      <!-- Formats: PDF, Word, Videos/Lectures, Audio, Experiments -->
+      <div class="card">
+        <div class="format-tabs" id="formatTabs">
+          <button class="fmt-btn active" data-fmt="pdf" onclick="selectFormat('pdf')">📕 صيغة PDF</button>
+          <button class="fmt-btn" data-fmt="word" onclick="selectFormat('word')">📘 صيغة Word</button>
+          <button class="fmt-btn" data-fmt="video" onclick="selectFormat('video')">🎬 فيديوهات ومحاضرات</button>
+          <button class="fmt-btn" data-fmt="audio" onclick="selectFormat('audio')">🎧 مقاطع صوتية</button>
+          <button class="fmt-btn" data-fmt="lab" onclick="selectFormat('lab')">🔬 تجارب تفاعلية</button>
+        </div>
+
+        <div class="viewer-box" id="contentViewer"></div>
+        <canvas id="drawCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a class="wa-float no-print" id="floatingWaBtn" href="https://wa.me/967770000000" target="_blank" rel="noopener" title="تواصل واتساب">💬</a>
+
+    <!-- Bottom All-Tools Bar -->
+    <nav class="bottom-tools-bar no-print" aria-label="شريط جميع الأدوات">
+      <button class="tool-item" id="toolPenBtn" onclick="toggleDrawTool()">
+        <span class="ico">🖍️</span>
+        <span>تظليل/رسم</span>
+      </button>
+      <button class="tool-item" onclick="openToolModal('notes')">
+        <span class="ico">📓</span>
+        <span>ملاحظات</span>
+      </button>
+      <button class="tool-item" onclick="openToolModal('calc')">
+        <span class="ico">🧮</span>
+        <span>حاسبة</span>
+      </button>
+      <button class="tool-item" onclick="changeFontScale(1)">
+        <span class="ico">🔎</span>
+        <span>تكبير</span>
+      </button>
+      <button class="tool-item" onclick="toggleDarkMode()">
+        <span class="ico">🌙</span>
+        <span>ليلي</span>
+      </button>
+      <button class="tool-item" onclick="saveOfflineSnapshot()">
+        <span class="ico">💾</span>
+        <span>حفظ</span>
+      </button>
+      <button class="tool-item" onclick="window.print()">
+        <span class="ico">🖨️</span>
+        <span>طباعة</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Generic Modal -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-card" id="modalCard"></div>
+  </div>
+
+  <script>
+    // Yemeni Official System Data (Basic 1-9 + Secondary 1-3 Scientific/Literary)
+    const YEMEN_GRADES = {
+      basic: [
+        { id: 'b1', name: 'الصف الأول الأساسي', hasTrack: false },
+        { id: 'b2', name: 'الصف الثاني الأساسي', hasTrack: false },
+        { id: 'b3', name: 'الصف الثالث الأساسي', hasTrack: false },
+        { id: 'b4', name: 'الصف الرابع الأساسي', hasTrack: false },
+        { id: 'b5', name: 'الصف الخامس الأساسي', hasTrack: false },
+        { id: 'b6', name: 'الصف السادس الأساسي', hasTrack: false },
+        { id: 'b7', name: 'الصف السابع الأساسي', hasTrack: false },
+        { id: 'b8', name: 'الصف الثامن الأساسي', hasTrack: false },
+        { id: 'b9', name: 'الصف التاسع الأساسي (الشهادة الأساسية)', hasTrack: false }
+      ],
+      secondary: [
+        { id: 's1', name: 'الصف الأول الثانوي (عام)', hasTrack: false },
+        { id: 's2', name: 'الصف الثاني الثانوي', hasTrack: true },
+        { id: 's3', name: 'الصف الثالث الثانوي (الشهادة الثانوية)', hasTrack: true }
+      ]
+    };
+
+    const SUBJECTS_BY_CONTEXT = {
+      early_basic: [
+        { id: 'quran', name: 'القرآن الكريم', icon: '📖' },
+        { id: 'islamic', name: 'التربية الإسلامية', icon: '🕌' },
+        { id: 'arabic', name: 'القراءة واللغة العربية', icon: '✍️' },
+        { id: 'math', name: 'الرياضيات', icon: '🔢' },
+        { id: 'science', name: 'العلوم والبيئة', icon: '🌱' },
+        { id: 'social', name: 'التربية الاجتماعية', icon: '🗺️' },
+        { id: 'arts', name: 'التربية الفنية والنشيد', icon: '🎨' }
+      ],
+      upper_basic: [
+        { id: 'quran', name: 'القرآن وعلومه', icon: '📖' },
+        { id: 'islamic', name: 'التربية الإسلامية', icon: '🕌' },
+        { id: 'arabic', name: 'اللغة العربية', icon: '📜' },
+        { id: 'english', name: 'اللغة الإنجليزية (Yemen)', icon: '🌐' },
+        { id: 'math', name: 'الرياضيات', icon: '📐' },
+        { id: 'science', name: 'العلوم المدمجة', icon: '🔬' },
+        { id: 'social', name: 'الدراسات الاجتماعية', icon: '🧭' },
+        { id: 'national', name: 'التربية الوطنية', icon: '🇾🇪' }
+      ],
+      sec_general: [
+        { id: 'quran', name: 'القرآن وعلومه', icon: '📖' },
+        { id: 'islamic', name: 'التربية الإسلامية', icon: '🕌' },
+        { id: 'arabic', name: 'اللغة العربية', icon: '📜' },
+        { id: 'english', name: 'اللغة الإنجليزية', icon: '🌐' },
+        { id: 'math', name: 'الرياضيات', icon: '∑' },
+        { id: 'physics', name: 'الفيزياء', icon: '⚛️' },
+        { id: 'chemistry', name: 'الكيمياء', icon: '🧪' },
+        { id: 'biology', name: 'الأحياء', icon: '🧬' },
+        { id: 'history', name: 'التاريخ', icon: '🏛️' },
+        { id: 'geography', name: 'الجغرافيا', icon: '🌍' },
+        { id: 'computing', name: 'الحاسوب', icon: '💻' }
+      ],
+      sec_scientific: [
+        { id: 'quran', name: 'القرآن وعلومه', icon: '📖' },
+        { id: 'islamic', name: 'التربية الإسلامية', icon: '🕌' },
+        { id: 'arabic', name: 'اللغة العربية', icon: '📜' },
+        { id: 'english', name: 'اللغة الإنجليزية', icon: '🌐' },
+        { id: 'math', name: 'الرياضيات', icon: '∑' },
+        { id: 'physics', name: 'الفيزياء', icon: '⚛️' },
+        { id: 'chemistry', name: 'الكيمياء', icon: '🧪' },
+        { id: 'biology', name: 'الأحياء', icon: '🧬' },
+        { id: 'computing', name: 'الحاسوب', icon: '💻' }
+      ],
+      sec_literary: [
+        { id: 'quran', name: 'القرآن وعلومه', icon: '📖' },
+        { id: 'islamic', name: 'التربية الإسلامية', icon: '🕌' },
+        { id: 'arabic', name: 'اللغة العربية (نحو، بلاغة، أدب)', icon: '📜' },
+        { id: 'english', name: 'اللغة الإنجليزية', icon: '🌐' },
+        { id: 'history', name: 'التاريخ', icon: '🏛️' },
+        { id: 'geography', name: 'الجغرافيا', icon: '🌍' },
+        { id: 'sociology', name: 'علم الاجتماع', icon: '👥' },
+        { id: 'psychology', name: 'علم النفس', icon: '🧠' },
+        { id: 'logic', name: 'الفلسفة والمنطق', icon: '⚖️' },
+        { id: 'economics', name: 'الاقتصاد والإحصاء', icon: '📊' }
+      ]
+    };
+
+    const THEMES = ['', 'theme-emerald', 'theme-royal-indigo', 'theme-warm-gold'];
+
+    const state = {
+      role: 'طالب',
+      userName: 'نسيم حميد المنتصر',
+      location: 'الحديدة - المدينة',
+      stage: 'secondary',
+      gradeId: 's3',
+      track: 'علمي',
+      activeSubject: null,
+      activeSection: 'book',
+      activeFormat: 'pdf',
+      themeIndex: 0,
+      darkMode: false,
+      fontScale: 1,
+      drawEnabled: false,
+      waPrimary: '77XXXXXXX',
+      waSecondary: '73XXXXXXX',
+      notes: 'مراجعة دروس الوحدة الأولى وحل تقاويم نهاية الدروس.',
+      tasks: [
+        { id: 1, title: 'حل تقويم الدرس الأول والثاني', status: 'جديدة' },
+        { id: 2, title: 'مراجعة ملخص القوانين والمفاهيم', status: 'معلقة' },
+        { id: 3, title: 'اختبار تدريبي على نموذج سابق', status: 'مؤرشفة' }
+      ],
+      teachers: [
+        { id: 1, name: 'أ. سالم الحذيفي', subject: 'الرياضيات' },
+        { id: 2, name: 'أ. هدى الشرعبي', subject: 'اللغة العربية' },
+        { id: 3, name: 'أ. طارق الزبيري', subject: 'الفيزياء والعلوم' }
+      ],
+      honorRoll: [
+        { rank: 1, name: 'نسيم حميد المنتصر', scope: 'المدرسة / المديرية', score: '99.4%' },
+        { rank: 2, name: 'سارة عبد الله', scope: 'المحافظة', score: '98.9%' },
+        { rank: 3, name: 'مراد أحمد', scope: 'الجمهورية', score: '98.5%' }
+      ]
+    };
+
+    let deferredPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    document.getElementById('installAppBtn').addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      } else {
+        openModal(`
+          <h3 style="margin-top:0;">📲 تثبيت تطبيق أفق اليمن على الجوال</h3>
+          <p style="font-size:13px; line-height:1.7; color:var(--text-muted);">
+            • على <strong>أندرويد (Chrome):</strong> افتح قائمة المتصفح (⋮) واختر <strong>"إضافة إلى الشاشة الرئيسية" (Add to Home Screen)</strong>.<br/>
+            • على <strong>آيفون (Safari):</strong> اضغط زر المشاركة (⬆️) واختر <strong>"إضافة إلى الشاشة الرئيسية"</strong>.<br/>
+            • لتحويله إلى ملف <strong>APK</strong> للتحميل المباشر: ارفع المجلد على استضافة مجانية (Netlify / GitHub Pages) وأدخل الرابط في <strong>PWABuilder.com</strong>.
+          </p>
+          <button class="btn btn-primary" onclick="closeModal()">حسناً</button>
+        `);
+      }
+    });
+
+    function initApp() {
+      populateGradesDropdown('authStageSelect', 'authGradeSelect', 'authTrackWrap');
+      document.getElementById('authGradeSelect').value = 's3';
+      toggleTrackSelect('authGradeSelect', 'authTrackWrap');
+      renderWhatsAppNumbers();
+      setupCanvasDrawing();
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      }
+    }
+
+    function selectRole(role) {
+      state.role = role;
+      document.querySelectorAll('.role-card').forEach(card => {
+        card.classList.toggle('active', card.dataset.role === role);
+      });
+    }
+
+    function populateGradesDropdown(stageSelId, gradeSelId, trackWrapId) {
+      const stage = document.getElementById(stageSelId).value;
+      const gradeSel = document.getElementById(gradeSelId);
+      gradeSel.innerHTML = '';
+      YEMEN_GRADES[stage].forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g.id;
+        opt.textContent = g.name;
+        gradeSel.appendChild(opt);
+      });
+      toggleTrackSelect(gradeSelId, trackWrapId);
+    }
+
+    function toggleTrackSelect(gradeSelId, trackWrapId) {
+      const val = document.getElementById(gradeSelId).value;
+      const showTrack = val === 's2' || val === 's3';
+      document.getElementById(trackWrapId).classList.toggle('hidden', !showTrack);
+    }
+
+    function getGradeLabel() {
+      const stageList = YEMEN_GRADES[state.stage] || [];
+      const found = stageList.find(g => g.id === state.gradeId) || stageList[0];
+      if (found && found.hasTrack) {
+        return `${found.name} — القسم ${state.track}`;
+      }
+      return found ? found.name : 'الصف التاسع الأساسي';
+    }
+
+    function getSubjectsForCurrentGrade() {
+      if (state.stage === 'basic') {
+        const num = parseInt(state.gradeId.replace('b', ''), 10) || 1;
+        return num <= 6 ? SUBJECTS_BY_CONTEXT.early_basic : SUBJECTS_BY_CONTEXT.upper_basic;
+      }
+      if (state.gradeId === 's1') return SUBJECTS_BY_CONTEXT.sec_general;
+      return state.track === 'أدبي' ? SUBJECTS_BY_CONTEXT.sec_literary : SUBJECTS_BY_CONTEXT.sec_scientific;
+    }
+
+    function enterDashboard(isDemo) {
+      state.userName = document.getElementById('authNameInput').value.trim() || (isDemo ? 'طالب تجريبي' : 'طالب مفعل');
+      state.location = document.getElementById('authGovInput').value.trim() || 'الجمهورية اليمنية';
+      state.stage = document.getElementById('authStageSelect').value;
+      state.gradeId = document.getElementById('authGradeSelect').value;
+      state.track = document.getElementById('authTrackSelect').value;
+
+      renderDashboard();
+      showScreen('dashboard');
+    }
+
+    function renderDashboard() {
+      const avatarMap = { 'طالب': '🎓', 'معلم': '👨‍🏫', 'مدرسة': '🏫', 'ولي امر': '👨‍👩‍👧' };
+      document.getElementById('dashAvatar').textContent = avatarMap[state.role] || '🎓';
+      document.getElementById('dashUserName').textContent = state.userName;
+      document.getElementById('dashGradeBadge').textContent = `الصف: ${getGradeLabel()}`;
+      document.getElementById('dashRoleLocation').textContent = `${state.role} • ${state.location}`;
+
+      const subjects = getSubjectsForCurrentGrade();
+      document.getElementById('subjectsCountLabel').textContent = `${subjects.length} مواد`;
+      const strip = document.getElementById('subjectsStrip');
+      strip.innerHTML = '';
+
+      subjects.forEach((subj, idx) => {
+        const div = document.createElement('div');
+        div.className = 'subj-chip' + (idx === 0 ? ' active' : '');
+        div.innerHTML = `<span class="subj-icon">${subj.icon}</span><div class="subj-title">${subj.name}</div>`;
+        div.onclick = () => openSubjectWorkspace(subj);
+        strip.appendChild(div);
+      });
+    }
+
+    function openSubjectWorkspace(subj) {
+      state.activeSubject = subj;
+      state.activeSection = 'book';
+      state.activeFormat = 'pdf';
+
+      document.getElementById('subjBreadcrumb').textContent = `${getGradeLabel()} • ${state.role}`;
+      document.getElementById('activeSubjectTitle').textContent = `${subj.icon} ${subj.name}`;
+
+      document.querySelectorAll('.section-card').forEach(c => {
+        c.classList.toggle('selected', c.dataset.sec === 'book');
+      });
+      document.querySelectorAll('.fmt-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.fmt === 'pdf');
+      });
+
+      renderSectionContent();
+      showScreen('subject');
+    }
+
+    function selectSection(secKey) {
+      state.activeSection = secKey;
+      document.querySelectorAll('.section-card').forEach(c => {
+        c.classList.toggle('selected', c.dataset.sec === secKey);
+      });
+      renderSectionContent();
+    }
+
+    function selectFormat(fmtKey) {
+      state.activeFormat = fmtKey;
+      document.querySelectorAll('.fmt-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.fmt === fmtKey);
+      });
+      renderSectionContent();
+    }
+
+    function renderSectionContent() {
+      const viewer = document.getElementById('contentViewer');
+      const subjName = state.activeSubject ? state.activeSubject.name : 'المادة الدراسية';
+      const gradeName = getGradeLabel();
+
+      const sectionNames = {
+        book: 'الكتاب المدرسي',
+        summaries: 'الملخصات المركزة',
+        models: 'النماذج والاختبارات السابقة',
+        solutions: 'حل الاختبارات النموذجي',
+        assessments: 'حل أسئلة تقاويم جميع الدروس'
+      };
+
+      const secTitle = sectionNames[state.activeSection];
+
+      if (state.activeFormat === 'pdf') {
+        viewer.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="badge">📕 عارض PDF • ${secTitle}</span>
+            <span style="font-size:11px; color:var(--text-muted);">${gradeName}</span>
+          </div>
+          <p style="font-size:13px; line-height:1.7; margin:0;">
+            <strong>${subjName} — ${secTitle}:</strong> يعرض هذا القسم محتوى المنهج اليمني المعتمد بصيغة <strong>PDF</strong> للصف <strong>${gradeName}</strong>، مع إمكانية التظليل عبر أداة التظليل في الشريط السفلي أو الطباعة المباشرة.
+          </p>
+        `;
+      } else if (state.activeFormat === 'word') {
+        viewer.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="badge">📘 مستند Word قابل للتعديل</span>
+            <button class="small-pill" onclick="downloadWordDoc()">⬇️ تنزيل .DOC</button>
+          </div>
+          <textarea id="wordEditorArea" rows="6" style="font-size:13px; line-height:1.7;">${subjName} - ${secTitle} (${gradeName})
+----------------------------------------
+النقاط الأساسية والإجابات النموذجية:
+1- تعريف المفاهيم والمصطلحات الأساسية في الدرس.
+2- خطوات الحل والتطبيق العملي.
+3- ملاحظات المراجعة النهائية.</textarea>
+        `;
+      } else if (state.activeFormat === 'video') {
+        viewer.innerHTML = `
+          <span class="badge">🎬 فيديوهات ومحاضرات مصورة</span>
+          <p style="font-size:13px; margin:8px 0;">محاضرة شرح مبسطة لـ <strong>${subjName}</strong> (${secTitle}) — ${gradeName}:</p>
+          <div style="background:#0f172a; color:#fff; border-radius:12px; padding:18px; text-align:center;">
+            <div style="font-size:34px; margin-bottom:6px;">▶️</div>
+            <div style="font-size:13px; font-weight:800;">محاضرة شرح: ${subjName} (${secTitle})</div>
+            <div style="font-size:11px; opacity:0.8; margin-top:4px;">جاهز لربط ملفات الفيديو أو البث التعليمي</div>
+          </div>
+        `;
+      } else if (state.activeFormat === 'audio') {
+        viewer.innerHTML = `
+          <span class="badge">🎧 مقاطع صوتية وتلاوات وشروحات</span>
+          <p style="font-size:13px; margin:8px 0;">استماع صوتي لـ <strong>${subjName}</strong> — ${secTitle}:</p>
+          <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:12px;">
+            <div style="font-size:12.5px; font-weight:800; margin-bottom:8px;">🎙️ تسجيل صوتي تعليمي: ${subjName}</div>
+            <audio controls style="width:100%;" src=""></audio>
+            <div style="font-size:11px; color:var(--text-muted); margin-top:6px;">يمكن إسناد ملف صوتي (.mp3 / .ogg) لكل درس أو ملخص.</div>
+          </div>
+        `;
+      } else if (state.activeFormat === 'lab') {
+        viewer.innerHTML = `
+          <span class="badge">🔬 معمل التجارب التفاعلية</span>
+          <p style="font-size:13px; margin:8px 0;">محاكاة تجربة علمية وتطبيقية لمادة <strong>${subjName}</strong> (${gradeName}):</p>
+          <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:12px;">
+            <label>اضبط قيمة المتغير التجريبي (الشدة / التركيز / الزاوية): <strong id="labValLabel">50</strong></label>
+            <input type="range" min="0" max="100" value="50" oninput="updateLabSim(this.value)" />
+            <div id="labResultBox" style="margin-top:8px; padding:10px; border-radius:10px; background:rgba(13,148,136,0.12); font-size:12.5px; font-weight:700;">
+              النتيجة التجريبية عند المستوى (50): استقرار وتوازن في القياس.
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function updateLabSim(val) {
+      document.getElementById('labValLabel').textContent = val;
+      const box = document.getElementById('labResultBox');
+      let msg = 'استقرار وتوازن في القياس.';
+      if (val > 75) msg = 'ارتفاع ملحوظ في سرعة التفاعل/الاستجابة مع ضرورة مراعاة حدود الأمان.';
+      else if (val < 25) msg = 'انخفاض في معدل الاستجابة مقارنة بالحالة القياسية.';
+      box.textContent = `النتيجة التجريبية عند المستوى (${val}): ${msg}`;
+    }
+
+    function downloadWordDoc() {
+      const area = document.getElementById('wordEditorArea');
+      const text = area ? area.value : 'مستند أفق اليمن التعليمي';
+      const blob = new Blob(['﻿' + text], { type: 'application/msword;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${(state.activeSubject?.name || 'ufuq-yemen')}.doc`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function showScreen(name) {
+      document.getElementById('screenAuth').classList.toggle('hidden', name !== 'auth');
+      document.getElementById('screenDashboard').classList.toggle('hidden', name !== 'dashboard');
+      document.getElementById('screenSubject').classList.toggle('hidden', name !== 'subject');
+    }
+
+    document.getElementById('switchScreenBtn').addEventListener('click', () => {
+      showScreen('auth');
+    });
+
+    document.getElementById('cycleThemeBtn').addEventListener('click', () => {
+      state.themeIndex = (state.themeIndex + 1) % THEMES.length;
+      document.body.classList.remove(...THEMES.filter(Boolean));
+      if (THEMES[state.themeIndex]) {
+        document.body.classList.add(THEMES[state.themeIndex]);
+      }
+    });
+
+    // WhatsApp X-pattern display & editor
+    function renderWhatsAppNumbers() {
+      document.getElementById('waPrimaryDisplay').textContent = state.waPrimary;
+      document.getElementById('waSecondaryDisplay').textContent = state.waSecondary;
+      const cleanDigits = (state.waPrimary || '').replace(/\D/g, '');
+      const waBtn = document.getElementById('floatingWaBtn');
+      waBtn.href = cleanDigits.length >= 7 ? `https://wa.me/967${cleanDigits}` : 'https://wa.me/';
+    }
+
+    function openWhatsAppEditor() {
+      openModal(`
+        <h3 style="margin-top:0;">✏️ تحديث أرقام الواتساب ونقاط البيع</h3>
+        <label>الرقم الأول (مثال: 77XXXXXXX أو الرقم الفعلي)</label>
+        <input type="text" id="editWa1" value="${state.waPrimary}" style="margin-bottom:10px; direction:ltr;" />
+        <label>الرقم الثاني (مثال: 73XXXXXXX أو الرقم الفعلي)</label>
+        <input type="text" id="editWa2" value="${state.waSecondary}" style="margin-bottom:14px; direction:ltr;" />
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-primary" onclick="saveWhatsAppNumbers()">حفظ الأرقام</button>
+          <button class="btn btn-outline" onclick="closeModal()">إلغاء</button>
+        </div>
+      `);
+    }
+
+    function saveWhatsAppNumbers() {
+      state.waPrimary = document.getElementById('editWa1').value.trim() || '77XXXXXXX';
+      state.waSecondary = document.getElementById('editWa2').value.trim() || '73XXXXXXX';
+      renderWhatsAppNumbers();
+      closeModal();
+    }
+
+    // Quick Grade Switcher Modal inside Dashboard
+    function openQuickGradeModal() {
+      openModal(`
+        <h3 style="margin-top:0;">📚 اختيار المرحلة والصف (النظام اليمني)</h3>
+        <label>المرحلة التعليمية</label>
+        <select id="quickStageSel" onchange="populateGradesDropdown('quickStageSel', 'quickGradeSel', 'quickTrackWrap')" style="margin-bottom:10px;">
+          <option value="basic" ${state.stage === 'basic' ? 'selected' : ''}>مرحلة التعليم الأساسي (1 - 9 أساسي)</option>
+          <option value="secondary" ${state.stage === 'secondary' ? 'selected' : ''}>مرحلة التعليم الثانوي (1 - 3 ثانوي)</option>
+        </select>
+        <label>الصف الدراسي</label>
+        <select id="quickGradeSel" onchange="toggleTrackSelect('quickGradeSel', 'quickTrackWrap')" style="margin-bottom:10px;"></select>
+        <div id="quickTrackWrap" class="hidden" style="margin-bottom:12px;">
+          <label>التخصص / القسم</label>
+          <select id="quickTrackSel">
+            <option value="علمي" ${state.track === 'علمي' ? 'selected' : ''}>القسم العلمي</option>
+            <option value="أدبي" ${state.track === 'أدبي' ? 'selected' : ''}>القسم الأدبي</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="applyQuickGrade()">تطبيق الصف والمواد</button>
+      `);
+      populateGradesDropdown('quickStageSel', 'quickGradeSel', 'quickTrackWrap');
+      document.getElementById('quickGradeSel').value = state.gradeId;
+      toggleTrackSelect('quickGradeSel', 'quickTrackWrap');
+    }
+
+    function applyQuickGrade() {
+      state.stage = document.getElementById('quickStageSel').value;
+      state.gradeId = document.getElementById('quickGradeSel').value;
+      const trackSel = document.getElementById('quickTrackSel');
+      if (trackSel) state.track = trackSel.value;
+      renderDashboard();
+      closeModal();
+    }
+
+    // Feature Banners Modal (Tasks, Teachers, Honor Roll)
+    function openFeatureModal(kind) {
+      if (kind === 'tasks') {
+        const itemsHtml = state.tasks.map(t => `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px; border:1px solid var(--border); border-radius:10px; margin-bottom:6px;">
+            <span style="font-size:12.5px; font-weight:700;">${t.title}</span>
+            <span class="badge">${t.status}</span>
+          </div>
+        `).join('');
+        openModal(`
+          <h3 style="margin-top:0;">🗂️ مهام دراسية</h3>
+          ${itemsHtml}
+          <input type="text" id="newTaskInput" placeholder="أضف مهمة دراسية جديدة..." style="margin:8px 0;" />
+          <button class="btn btn-demo" onclick="addTaskItem()">إضافة مهمة</button>
+        `);
+      } else if (kind === 'teachers') {
+        const listHtml = state.teachers.map(tc => `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px; border:1px solid var(--border); border-radius:10px; margin-bottom:6px;">
+            <div>
+              <div style="font-size:13px; font-weight:800;">${tc.name}</div>
+              <div style="font-size:11px; color:var(--text-muted);">${tc.subject}</div>
+            </div>
+            <button class="small-pill" onclick="deleteTeacher(${tc.id})">حذف</button>
+          </div>
+        `).join('');
+        openModal(`
+          <h3 style="margin-top:0;">👩‍🏫 المعلمون (إضافة | بحث | حذف)</h3>
+          <input type="text" id="searchTeacherInput" placeholder="ابحث عن معلم أو مادة..." oninput="filterTeachersModal()" style="margin-bottom:8px;" />
+          <div id="teachersListBox">${listHtml}</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px;">
+            <input type="text" id="newTeacherName" placeholder="اسم المعلم" />
+            <input type="text" id="newTeacherSubj" placeholder="المادة" />
+          </div>
+          <button class="btn btn-register" style="margin-top:8px;" onclick="addTeacherItem()">إضافة معلم</button>
+        `);
+      } else if (kind === 'honor') {
+        const rows = state.honorRoll.map(h => `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px; border:1px solid var(--border); border-radius:10px; margin-bottom:6px;">
+            <div>
+              <strong>#${h.rank} — ${h.name}</strong>
+              <div style="font-size:11px; color:var(--text-muted);">${h.scope}</div>
+            </div>
+            <span class="badge">${h.score}</span>
+          </div>
+        `).join('');
+        openModal(`
+          <h3 style="margin-top:0;">🏅 لوحة الشرف — المتميزون</h3>
+          <p style="font-size:12px; color:var(--text-muted);">على مستوى الجمهورية • المحافظة | المديرية | المدرسة</p>
+          ${rows}
+          <button class="btn btn-primary" onclick="closeModal()">إغلاق</button>
+        `);
+      }
+    }
+
+    function addTaskItem() {
+      const inp = document.getElementById('newTaskInput');
+      if (!inp || !inp.value.trim()) return;
+      state.tasks.unshift({ id: Date.now(), title: inp.value.trim(), status: 'جديدة' });
+      openFeatureModal('tasks');
+    }
+
+    function addTeacherItem() {
+      const n = document.getElementById('newTeacherName')?.value.trim();
+      const s = document.getElementById('newTeacherSubj')?.value.trim();
+      if (!n || !s) return;
+      state.teachers.push({ id: Date.now(), name: n, subject: s });
+      openFeatureModal('teachers');
+    }
+
+    function deleteTeacher(id) {
+      state.teachers = state.teachers.filter(t => t.id !== id);
+      openFeatureModal('teachers');
+    }
+
+    function filterTeachersModal() {
+      const q = (document.getElementById('searchTeacherInput')?.value || '').trim();
+      const box = document.getElementById('teachersListBox');
+      if (!box) return;
+      const filtered = state.teachers.filter(t => t.name.includes(q) || t.subject.includes(q));
+      box.innerHTML = filtered.map(tc => `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:8px; border:1px solid var(--border); border-radius:10px; margin-bottom:6px;">
+          <div>
+            <div style="font-size:13px; font-weight:800;">${tc.name}</div>
+            <div style="font-size:11px; color:var(--text-muted);">${tc.subject}</div>
+          </div>
+          <button class="small-pill" onclick="deleteTeacher(${tc.id})">حذف</button>
+        </div>
+      `).join('');
+    }
+
+    // Bottom Bar Tools
+    function toggleDrawTool() {
+      state.drawEnabled = !state.drawEnabled;
+      document.getElementById('toolPenBtn').classList.toggle('active-tool', state.drawEnabled);
+      const canvas = document.getElementById('drawCanvas');
+      if (state.drawEnabled) {
+        if (document.getElementById('screenSubject').classList.contains('hidden')) {
+          const subjects = getSubjectsForCurrentGrade();
+          openSubjectWorkspace(subjects[0]);
+        }
+        canvas.style.display = 'block';
+      } else {
+        canvas.style.display = 'none';
+      }
+    }
+
+    function setupCanvasDrawing() {
+      const canvas = document.getElementById('drawCanvas');
+      const ctx = canvas.getContext('2d');
+      let drawing = false;
+
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          canvas.width = rect.width;
+          canvas.height = rect.height;
+        }
+      }
+
+      const obs = new ResizeObserver(resizeCanvas);
+      obs.observe(canvas);
+
+      function getPos(e) {
+        const r = canvas.getBoundingClientRect();
+        const pt = e.touches ? e.touches[0] : e;
+        return { x: pt.clientX - r.left, y: pt.clientY - r.top };
+      }
+
+      canvas.addEventListener('pointerdown', (e) => {
+        drawing = true;
+        const p = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+      });
+
+      canvas.addEventListener('pointermove', (e) => {
+        if (!drawing) return;
+        const p = getPos(e);
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = 'rgba(245, 158, 11, 0.65)';
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+      });
+
+      window.addEventListener('pointerup', () => { drawing = false; });
+    }
+
+    function openToolModal(tool) {
+      if (tool === 'notes') {
+        openModal(`
+          <h3 style="margin-top:0;">📓 دفتر الملاحظات</h3>
+          <textarea id="notesTextarea" rows="6" style="margin-bottom:10px;">${state.notes}</textarea>
+          <button class="btn btn-primary" onclick="saveNotesModal()">حفظ الملاحظات</button>
+        `);
+      } else if (tool === 'calc') {
+        const keys = ['7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'];
+        openModal(`
+          <h3 style="margin-top:0;">🧮 الآلة الحاسبة</h3>
+          <input type="text" id="calcDisplay" readonly value="" style="direction:ltr; text-align:left; font-size:18px; font-weight:900;" />
+          <div class="calc-grid">
+            ${keys.map(k => `<button class="calc-btn" onclick="pressCalc('${k}')">${k}</button>`).join('')}
+          </div>
+          <button class="btn btn-outline" style="margin-top:8px;" onclick="document.getElementById('calcDisplay').value=''">مسح (C)</button>
+        `);
+      }
+    }
+
+    function saveNotesModal() {
+      state.notes = document.getElementById('notesTextarea').value;
+      closeModal();
+    }
+
+    function pressCalc(k) {
+      const disp = document.getElementById('calcDisplay');
+      if (!disp) return;
+      if (k === '=') {
+        try {
+          const safeExpr = disp.value.replace(/[^0-9+\-*/().]/g, '');
+          disp.value = String(Function('"use strict";return (' + safeExpr + ')')());
+        } catch {
+          disp.value = 'خطأ';
+        }
+      } else {
+        disp.value += k;
+      }
+    }
+
+    function changeFontScale(step) {
+      state.fontScale = Math.min(1.25, Math.max(0.9, +(state.fontScale + step * 0.05).toFixed(2)));
+      document.body.style.fontSize = `${state.fontScale * 16}px`;
+    }
+
+    function toggleDarkMode() {
+      state.darkMode = !state.darkMode;
+      document.body.classList.toggle('dark-mode', state.darkMode);
+    }
+
+    function saveOfflineSnapshot() {
+      try {
+        localStorage.setItem('ufuq_yemen_state', JSON.stringify(state));
+        openModal(`
+          <h3 style="margin-top:0;">💾 تم الحفظ محلياً</h3>
+          <p style="font-size:13px; color:var(--text-muted);">تم حفظ بيانات الصف والمواد والملاحظات والتعديلات بنجاح على جهازك.</p>
+          <button class="btn btn-primary" onclick="closeModal()">موافق</button>
+        `);
+      } catch {
+        closeModal();
+      }
+    }
+
+    function openModal(html) {
+      document.getElementById('modalCard').innerHTML = html;
+      document.getElementById('modalBackdrop').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('modalBackdrop').classList.remove('open');
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === 'modalBackdrop') closeModal();
+    }
+
+    initApp();
+  </script>
+</body>
+</html>

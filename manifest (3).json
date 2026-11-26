@@ -1,0 +1,16 @@
+{
+  "background_color": "#eb2222",
+  "dir": "auto",
+  "display": "standalone",
+  "name": "أفق اليمن التعليمي2",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "أفق اليمن التعليمي2",
+  "start_url": "PWA Start URL",
+  "theme_color": "#2fbe1e",
+  "id": "Ofup",
+  "description": "صرح تعليمي متكامل تطبيق تعليمي يخدم طلاب المنهج اليمني في التعليم الأساسي والثانوي، ويوفر تجربة دراسية منظمة مع إمكانية الدخول التجريبي وأدوات مساعدة مثل الملاحظات والحاسبة والوضع الليلي.",
+  "categories": [
+    "education"
+  ]
+}
